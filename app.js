@@ -4,9 +4,6 @@ var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 
- 
-
-
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
 var profileRouter = require("./routes/profile");
@@ -19,17 +16,18 @@ const https = require('https'); // nouveau module pour mettre en place un
 const fs = require('fs'); // "file system", module pour opération de lecture/d'écriture de fich
 
 const options = {
-    key: fs.readFileSync('localhost.key'),
-    cert: fs.readFileSync('localhost.crt')
-  };
-  
-  https.createServer(options, app).listen(3019, () => {
-    console.log('Server running on https://localhost:3019');
-  });
-  app.get('/', (req, res) => {
-    res.send('Hello HTTPS World!');
-  });
-  
+  key: fs.readFileSync('localhost.key'),
+  cert: fs.readFileSync('localhost.crt')
+};
+
+const server = https.createServer(options, app).listen(3019, () => {
+  console.log('Server running on https://localhost:3019');
+});
+
+app.get('/', (req, res) => {
+  res.send('Hello HTTPS World!');
+});
+
 const fileUpload = require("express-fileupload");
 app.use(fileUpload());
 const cors = require("cors");
@@ -46,4 +44,4 @@ app.use("/profile", profileRouter);
 app.use("/games", gameRouter);
 app.use("/ratings", ratingRouter);
 
-module.exports = app;
+module.exports = {app, server};
