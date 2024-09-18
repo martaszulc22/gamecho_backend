@@ -129,7 +129,7 @@ router.post('/saveGame', (req, res) => {
   })
 });
 
-// SECTION DERNIERS JEUX
+// SECTION RECHERCHE DES JEUX
 
 router.get("/search", async (req, res) => {
   // Extrait la requête de recherche à partir des paramètres d'URL
@@ -150,9 +150,9 @@ router.get("/search", async (req, res) => {
     return res.json({ result: false, error: "Aucun jeu trouvé" });
   }
   // Filtrer les résultats pour ne conserver que ceux dont le nom contient la chaîne de recherche
-  const filteredResults = searchData.results.filter((game) =>
-    game.name.toLowerCase().includes(name.toLowerCase()) // sans cette fonction, les jeux donnés en réponse n'étaient pas pertinent
-  );
+  // const filteredResults = searchData.results.filter((game) =>
+  //   game.name.toLowerCase().includes(name.toLowerCase()) // sans cette fonction, les jeux donnés en réponse n'étaient pas pertinent
+  // );
   // Filtrer les résultats pour exclure les jeux amateurs (avec un nombre minimal de critiques ?)
   // const filteredByPopularity = filteredResults.filter((game) => game.reviews_count > 100); // exclut les jeux avec moins de 100 critiques
 
@@ -163,9 +163,6 @@ router.get("/search", async (req, res) => {
   // Extraction de la clé ID pour fetcher la route qui détaille les jeux
   const gameIDs = searchData.results.slice(0, 10).map((game) => game.id); // pour une recherche, on limite à 10 jeux pour l'instant à modifier si bouton +
   // console.log(gameIDs);
-
-
-
 
   const savedGames = []; // tableau vide composé en aval des résultats pertinents
 
