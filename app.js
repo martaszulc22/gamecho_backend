@@ -14,7 +14,11 @@ var ratingRouter = require("./routes/ratings");
 var app = express();
 
 const cors = require("cors");
-app.use(cors());
+app.use(cors({
+    origin: 'https://gamecho-frontend.vercel.app', // Replace with your frontend URL
+    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allowed methods
+    allowedHeaders: ['Content-Type', 'Authorization'] // Allowed headers
+}));
 
 
 const fileUpload = require("express-fileupload");
