@@ -20,8 +20,8 @@ const options = {
   cert: fs.readFileSync('localhost.crt')
 };
 
-const server = https.createServer(options, app).listen(3019, () => {
-  console.log('Server running on https://localhost:3019');
+const server = app.listen(process.env.PORT || 3000, () => {
+  console.log('Server running');
 });
 
 app.get('/', (req, res) => {
@@ -44,4 +44,4 @@ app.use("/profile", profileRouter);
 app.use("/games", gameRouter);
 app.use("/ratings", ratingRouter);
 
-module.exports = {app, server};
+module.exports = { app, server };
