@@ -1,5 +1,5 @@
 const request = require('supertest');
-const { app, server } = require('./app');
+const app = require('./app');
 const User = require("../critickerlike_backend/models/users");
 const bcrypt = require("bcrypt");
 const mongoose = require('mongoose');
@@ -187,6 +187,5 @@ describe("POST /signup + /signin", () => {
 
     afterAll(async () => {
         await mongoose.connection.close();
-        server.close();
     });
 }); 
