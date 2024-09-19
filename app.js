@@ -1,4 +1,5 @@
 require("dotenv").config();
+require('./models/connection');
 var express = require("express");
 var path = require("path");
 var cookieParser = require("cookie-parser");
@@ -12,22 +13,12 @@ var ratingRouter = require("./routes/ratings");
 
 var app = express();
 
-const https = require('https'); // nouveau module pour mettre en place un
-const fs = require('fs'); // "file system", module pour opération de lecture/d'écriture de fich
-
-const options = {
-  key: fs.readFileSync('localhost.key'),
-  cert: fs.readFileSync('localhost.crt')
-};
-
-app.get('/', (req, res) => {
-  res.send('Hello HTTPS World!');
-});
+const cors = require("cors");
+app.use(cors());
 
 const fileUpload = require("express-fileupload");
 app.use(fileUpload());
-const cors = require("cors");
-app.use(cors());
+
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
