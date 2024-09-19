@@ -5,12 +5,6 @@ const moment = require("moment");
 const Game = require("../models/games");
 
 const API_KEY = process.env.API_KEY;
-const API_KEY_IGDB = process.env.API_KEY_IGDB;
-const BEARER_IGDB = process.env.BEARER_IGDB;
-
-// const moby_key = "moby_IflJKWa2Gpp3OGqFDaxD2018NKt"
-
-// NE PAS OUBLIER de renseigner sa clé RAWG API_KEY dans le fichier .env
 
 router.get("/latestreleased", async (req, res) => {
   // Obtention de la date d'aujourd'hui au format correspondant à celui de l'API.
@@ -100,7 +94,6 @@ router.get("/latestreleased", async (req, res) => {
 
   res.json({ result: true, latestgames: savedGames });
 });
-
 
 router.get('/ratings', (req, res) => {
 
