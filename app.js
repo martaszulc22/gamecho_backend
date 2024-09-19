@@ -16,10 +16,10 @@ var app = express();
 const cors = require("cors");
 app.use(cors());
 
-const fs = require("fs");
+
 const fileUpload = require("express-fileupload");
 app.use(fileUpload());
-app.use(fs());
+
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
